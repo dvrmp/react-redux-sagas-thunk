@@ -10,12 +10,14 @@ const mapStateToProp = (state)=>{
 
 const mapDispatchToProp = (dispatch) => {
     return {
-        loginUserAccountAction: (formValue)=> dispatch( loginUserAccountAction(formValue) )
+        loginUserAccountAction: ()=> dispatch( loginUserAccountAction() )
     }
 };
 
 
 const LoginPageComponent = ({ loginUserAccountAction }) => {
+
+
 
     const [ formState, setFormState ] = useState({
         username:'',
@@ -23,7 +25,7 @@ const LoginPageComponent = ({ loginUserAccountAction }) => {
     })
     const authenticationState = useSelector(state=>state.AUTHENTICATION);
 
-    console.log(authenticationState.LOADING)
+    console.log(authenticationState)
 
     const handleSubmit = (event) =>{
         event.preventDefault();
@@ -31,6 +33,7 @@ const LoginPageComponent = ({ loginUserAccountAction }) => {
     }
 
     useEffect(() => {
+        loginUserAccountAction();
         if(Object.keys(authenticationState.ERROR_LOGIN).length>0){
             setFormState({
                 username:'',

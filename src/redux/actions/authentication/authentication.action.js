@@ -3,29 +3,15 @@ LOGIN_USER_ACCOUNT,
 LOGIN_USER_ACCOUNT_APRROVED,
 LOGIN_USER_ACCOUNT_DENIED
 } from '../../actions-types/authentication/authentication.action-types';
+import {  } from '../user-action';
 import {
 loginUserAccountService
 } from '../../../services/authentication/authentication.service';
+import { CALL_API_USERS } from '../../actions-types/users.actions';
 
-
-export const loginUserAccountAction = (formvalue) => {
-    return (dispatch, getState)=> {
-        dispatch({ type: LOGIN_USER_ACCOUNT });
-        loginUserAccountService(formvalue).then((response)=>{
-            dispatch({
-                type: LOGIN_USER_ACCOUNT_APRROVED,
-                payload: {
-                    USER_ACCOUNT_TOKEN: response.token,
-                    ID_USER_ACCOUNT: response.id_user_account
-                }
-            });
-        }).catch((error)=>{
-            dispatch({
-                type: LOGIN_USER_ACCOUNT_DENIED,
-                payload: {
-                    ERROR_LOGIN: error,
-                }
-            })
-        });
+//RENAMED TO THUNK
+export const loginUserAccountAction = () => {
+    return {
+        type: CALL_API_USERS
     }
 }
